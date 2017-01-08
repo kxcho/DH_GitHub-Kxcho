@@ -1,0 +1,854 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<style>li {padding:10px; list-style: none}</style>
+<body>
+
+  <h3>JavaScript</h3>
+  Windows객체(창이나 프레임을 의미) 밑에
+  <br> DOM객체 : Document Object Model(body, img등 태그 제어)
+  <br> BOM객채 : Navigation,frames, screen, location, history
+  <br> - Browser Object Model. 웹페이지의 내용을 제외한 브라우저의 각종 요소들을 객체화시킨 것이다. 전역객체 Window의 프로퍼티에 속한 객체들이 이에 속한다.
+  <br> - window.document
+  <br> - window.navigator
+  <br> - window.document
+  <br> - window.document
+  <br> - window.document
+  <br> JavaScript : BW,GAS,Node.js 제어 - Object,Array,Function
+  <br> - 객체를 제어해서 웹브라우저를 제어할 수 있게 된다
+
+  <input type="button" value="alert" onclick="alert('hello world');" />
+  <input type="button" value="confirm" onclick="func_confirm()" />
+
+ <script>
+     function func_confirm(){
+         if(confirm('ok?')){
+             alert('ok');
+         } else {
+             alert('cancel');
+         }
+     }
+ </script>
+
+ <input type="button" value="prompt" onclick="func_prompt()" />
+ <script>
+     function func_prompt(){
+         if(prompt('id?') === 'egoing'){
+             alert('welcome');
+         } else {
+             alert('fail');
+         }
+     }
+</script>
+<h3>location 객체</h3>
+    <br> location.toString() : " + location.toString());
+    <br> location.href : " + location.href);
+    <br> location.protocol : " + location.protocol);
+    <br> location.host : " + location.host);
+    <br> location.port : " + location.port);
+    <br> location.pathname : " + location.pathname);
+    <br> location.search ?41 : " + location.search);
+    <br> location.hash #bookmark : " + location.hash);
+
+    <br>URL 변경하기 : location.href = 'http://egoing.net';
+    <br>현재 문서를 리로드 : location.reload();
+<script>
+     console.log("location.toString() : " + location.toString());
+     console.log("location.href : " + location.href);
+     console.log("location.protocol : " + location.protocol);
+     console.log("location.host : " + location.host);
+     console.log("location.port : " + location.port);
+     console.log("location.pathname : " + location.pathname);
+     console.log("location.search ?41 : " + location.search);
+     console.log("location.hash #bookmark : " + location.hash);
+</script>
+
+<h3>Navigator 객체 - 브라우저의 정보를 제공하는 객체</h3>
+<script>
+console.dir(navigator);
+console.dir("navigator appCodeName : " + navigator.appCodeName);
+console.dir("navigator appName : " + navigator.appName);
+console.dir("navigator appVersion : " + navigator.appVersion);
+console.dir("navigator userAgent : " + navigator.userAgent);
+console.dir("navigator platform : " + navigator.platform);
+</script>
+
+<h3>기능 테스트 - 브라우저의 정보를 제공하는 객체</h3>
+<script>
+if (!Object.keys) {
+  Object.keys = (function () {
+    'use strict';
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+        dontEnums = [
+          'toString',
+          'toLocaleString',
+          'valueOf',
+          'hasOwnProperty',
+          'isPrototypeOf',
+          'propertyIsEnumerable',
+          'constructor'
+        ],
+        dontEnumsLength = dontEnums.length;
+
+    return function (obj) {
+      if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+        throw new TypeError('Object.keys called on non-object');
+      }
+
+      var result = [], prop, i;
+
+      for (prop in obj) {
+        if (hasOwnProperty.call(obj, prop)) {
+          result.push(prop);
+        }
+      }
+
+      if (hasDontEnumBug) {
+        for (i = 0; i < dontEnumsLength; i++) {
+          if (hasOwnProperty.call(obj, dontEnums[i])) {
+            result.push(dontEnums[i]);
+          }
+        }
+      }
+      return result;
+    };
+  }());
+}
+</script>
+
+<h3>창 제어</h3>
+<ul>
+    <li>
+        첫번째 인자는 새 창에 로드할 문서의 URL이다. 인자를 생략하면 이름이 붙지 않은 새 창이 만들어진다.<br />
+        <input type="button" onclick="open1()" value="window.open('Test1.html');" />
+    </li>
+    <li>
+        두번째 인자는 새 창의 이름이다. _self는 스크립트가 실행되는 창을 의미한다.<br />
+        <input type="button" onclick="open2()" value="window.open('Test1.html', '_self');" />
+    </li>
+    <li>
+        _blank는 새 창을 의미한다. <br />
+        <input type="button" onclick="open3()" value="window.open('Test1.html', '_blank');" />
+    </li>
+    <li>
+        창에 이름을 붙일 수 있다. open을 재실행 했을 때 동일한 이름의 창이 있다면 그곳으로 문서가 로드된다.<br />
+        <input type="button" onclick="open4()" value="window.open('Test1.html', 'ot');" />
+    </li>
+    <li>
+        세번재 인자는 새 창의 모양과 관련된 속성이 온다.<br />
+        <input type="button" onclick="open5()" value="window.open('Test1.html', '_blank', 'width=200, height=200, resizable=yes');" />
+    </li>
+</ul>
+
+<script>
+function open1(){
+    window.open('demo2.html');
+}
+function open2(){
+    window.open('demo2.html', '_self');
+}
+function open3(){
+    window.open('demo2.html', '_blank');
+}
+function open4(){
+    window.open('demo2.html', 'ot');
+}
+function open5(){
+    window.open('demo2.html', '_blank', 'width=200, height=200, resizable=no');
+}
+</script>
+
+<h3>새 창에 접근</h3>
+<input type="button" value="open" onclick="winopen();" />
+<input type="text" onkeypress="winmessage(this.value)" />
+<input type="button" value="close" onclick="winclose()" />
+<script>
+function winopen(){
+    win = window.open('demo2.html', 'ot', 'width=300px, height=500px');
+}
+function winmessage(msg){
+    win.document.getElementById('message').innerText=msg;
+}
+function winclose(){
+    win.close();
+}
+</script>
+
+<h3>제어 대상 찾기 - document.getElementsByTagName</h3>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+<ol>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ol>
+<script>
+    var ul = document.getElementsByTagName('ul')[1];
+    var lis = ul.getElementsByTagName('li');
+    for(var i=0; i < lis.length; i++){
+        lis[i].style.color='red';
+    }
+</script>
+
+<h3>제어 대상 찾기 - document.getElementsByClassName - 다건 가능</h3>
+<ul>
+    <li>HTML</li>
+    <li class="active">CSS</li>
+    <li class="active">JavaScript</li>
+</ul>
+<script>
+    var lis = document.getElementsByClassName('active');
+    for(var i=0; i < lis.length; i++){
+        lis[i].style.color='red';
+    }
+</script>
+
+<h3>제어 대상 찾기 - document.getElementById - 1건 유일함</h3>
+<ul>
+    <li>HTML</li>
+    <li id="active">CSS</li>
+    <li>JavaScript</li>
+</ul>
+<script>
+    var li = document.getElementById('active');
+    li.style.color='red';
+</script>
+
+<ul>
+    <li class="marked">html</li>
+    <li>css</li>
+    <li id="active3">JavaScript
+        <ul>
+            <li>JavaScript Core</li>
+            <li class="marked">DOM</li>
+            <li class="marked">BOM</li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    var list = document.getElementsByClassName('marked');
+    console.group('document');
+    for(var i=0; i<list.length; i++){
+        console.log(list[i].textContent);
+    }
+    console.groupEnd();
+</script>
+
+<script>
+    console.group('active3');
+    var active = document.getElementById('active3');
+    var list = active.getElementsByClassName('marked');
+    for(var i=0; i<list.length; i++){
+        console.log(list[i].textContent);
+    }
+    console.groupEnd();
+</script>
+
+<h3>제어 대상 찾기 - document.querySelector - 하나만 리턴</h3>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+<ol>
+    <li>HTML</li>
+    <li class="active">CSS</li>
+    <li>JavaScript</li>
+</ol>
+
+<script>
+    var li = document.querySelector('li');
+    li.style.color='red';
+    var li = document.querySelector('.active');
+    li.style.color='blue';
+</script>
+
+<h3>제어 대상 찾기 - document.querySelectorAll - 다건 리턴</h3>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+<ol>
+    <li>HTML</li>
+    <li class="active">CSS</li>
+    <li>JavaScript</li>
+</ol>
+
+<script>
+    var lis = document.querySelectorAll('li');
+    for(var i=0; i < lis.length; i++){
+      lis[i].style.color = 'blue';
+    // for(var name in lis){
+    // lis[name].style.color = 'blue';
+    }
+</script>
+
+<h3>jQuery - jQuery는 DOM을 내부에 감추고 보다 쉽게 웹페이지를 조작할 수 있도록 돕는 도구</h3>
+<h3>jQuery - $(함수)('li')(엘리먼트,선택자).css('color', 'red')(메소드);</h3>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- <script>https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js</script> -->
+<script>
+$( document ).ready(function( $ ) {
+  $('body').prepend('<h1>Hello world  Cho</h1>');
+});
+</script>
+
+<style>
+#demo{width:200px;float: left; margin-top:120px;}
+#execute{float: left; margin:0; font-size:0.9em;}
+#execute{padding-left: 5px}
+#execute li{list-style: none}
+#execute pre{border:1px solid gray; padding:10px;}
+</style>
+<ul id="demo">
+  <li class="active">HTML</li>
+  <li id="active">CSS</li>
+  <li class="active">JavaScript</li>
+</ul>
+
+<ul id="execute">
+  <li>
+    <pre>
+      var lis = document.getElementsByTagName('li');
+      for(var i=0; i&lt;lis.length; i++){
+        lis[i].style.color='red';
+      }
+    </pre>
+
+    <pre>
+      $('li').css('color', 'red')
+    </pre>
+
+    <input type="button" value="execute" onclick="$('li').css('color', 'red')" />
+  </li>
+  <li>
+    <pre>
+      var lis = document.getElementsByClassName('active');
+      for(var i=0; i &lt; lis.length; i++){
+        lis[i].style.color='red';
+      }
+    </pre>
+    <pre>
+      $('.active').css('color', 'red')
+    </pre>
+    <input type="button" value="execute" onclick="$('.active').css('color', 'red')" />
+  </li>
+  <li>
+    <pre>
+      var li = document.getElementById('active');
+      li.style.color='red';
+      li.style.textDecoration='underline';
+    </pre>
+    <pre>
+      $('$active').css('color', 'red').css('textDecoration', 'underline');
+    </pre>
+    <input type="button" value="execute" onclick="$('#active').css('color', 'red').css('textDecoration', 'underline')" />
+  </li>
+</ul>
+
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+
+<h3>HTMLElement - document.getElementById의 리턴 데이터 타입-실행결과가 하나인 경우 HTMLLIELement</h3>
+<h3>HTMLCollection - document.getElementsByTagName의 리턴 데이터 타입-복수인 경우 HTMLCollection</h3>
+
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="active">JavaScript</li>
+</ul>
+<script>
+    var li = document.getElementById('active');
+    console.log("li.constructor.name : " + li.constructor.name);
+    var lis = document.getElementsByTagName('li');
+    console.log("lis.constructor.name : " + lis.constructor.name);
+</script>
+
+<a id="anchor" href="http://opentutorials.org">opentutorials</a>
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="list">JavaScript</li>
+</ul>
+<input type="button" id="button" value="button" />
+<script>
+    var li = document.getElementById('list');
+    console.log(li.constructor.name);
+
+    var anchor = document.getElementById('anchor');
+    console.log(anchor.constructor.name);
+
+    var button = document.getElementById('button');
+    console.log(button.constructor.name);
+</script>
+
+<pre>
+  interface <b>HTMLLIElement</b> : HTMLElement {
+             attribute DOMString       type;
+             attribute long            value;
+  };
+</pre>
+<pre>
+  interface <b>HTMLAnchorElement</b> : HTMLElement {
+             attribute DOMString       accessKey;
+             attribute DOMString       charset;
+             attribute DOMString       coords;
+             attribute DOMString       href;
+             attribute DOMString       hreflang;
+             attribute DOMString       name;
+             attribute DOMString       rel;
+             attribute DOMString       rev;
+             attribute DOMString       shape;
+             attribute long            tabIndex;
+             attribute DOMString       target;
+             attribute DOMString       type;
+    void               blur();
+    void               focus();
+  };
+</pre>
+<pre>
+  interface HTMLLIElement : HTMLElement {
+  interface HTMLAnchorElement : HTMLElement {
+
+  HTMLElement는 아래와 같다.
+  interface <b>HTMLElement</b> : Element {
+           attribute DOMString       id;
+           attribute DOMString       title;
+           attribute DOMString       lang;
+           attribute DOMString       dir;
+           attribute DOMString       className;
+};
+</pre>
+
+<h3>DOM Tree- MarkUp Language 제어(HTML,XML,SVG,XUL)</h3>
+<h4>Object >  Node >  Element > HTMLElement > HTMLLIElement</h4>
+
+<h4>식별자 API - HTML에서 엘리먼트의 이름과 id 그리고 class는 식별자로 사용된다. 식별자 API는 이 식별자를 가져오고 변경하는 역할을 한다.</h4>
+<h5>active1.id = "sss" : id 변경 가능</h5>
+<h5>active1.className += " readed": className 변경, 추가 가능</h5>
+<pre>
+문서내에서 특정한 엘리먼트를 식별하기 위한 용도로 사용되는 API
+
+Element.classList
+Element.className
+Element.id
+Element.tagName
+</pre>
+
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active1" class="important current">JavaScript</li>
+</ul>
+<script>
+console.log(document.getElementById('active1').classList)
+console.log(document.getElementById('active1').className)
+console.log(document.getElementById('active1').id)
+console.log(document.getElementById('active1').tagName)
+</script>
+
+<h5>classList</h5>
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li id="active2" class="important current">JavaScript</li>
+</ul>
+<script>
+function loop(){
+    for(var i=0; i<active2.classList.length; i++){
+        console.log(i, active2.classList[i]);
+    }
+}
+// 클래스를 추가
+</script>
+<input type="button" value="DOMTokenList" onclick="console.log(active2.classList);" />
+<input type="button" value="조회" onclick="loop();" />
+<input type="button" value="추가" onclick="active2.classList.add('marked');" />
+<input type="button" value="제거" onclick="active2.classList.remove('important');" />
+<input type="button" value="토글" onclick="active2.classList.toggle('current');" />
+
+<h4>조회 API</h4>
+<pre>
+엘리먼트의 하위 엘리먼트를 조회하는 API
+
+Element.getElementsByClassName
+Element.getElementsByTagName
+Element.querySelector
+Element.querySelectorAll
+</pre>
+
+<h4>속성 API</h4>
+<pre>
+엘리먼트의 속성을 알아내고 변경하는 API
+
+Element.getAttribute(name)
+Element.setAttribute(name, value)
+Element.hasAttribute(name);
+Element.removeAttribute(name);
+</pre>
+
+<a id="target4" href="http://opentutorials.org">opentutorials</a>
+<script>
+var t = document.getElementById('target4');
+console.log(t.getAttribute('href')); //http://opentutorials.org
+t.setAttribute('title', 'opentutorials.org'); // title 속성의 값을 설정한다.
+console.log(t.hasAttribute('title')); // true, title 속성의 존재여부를 확인한다.
+t.removeAttribute('title'); // title 속성을 제거한다.
+console.log(t.hasAttribute('title')); // false, title 속성의 존재여부를 확인한다.
+</script>
+
+<h4>속성과 프로퍼티</h4>
+<pre>
+// attribute 방식
+target.setAttribute('class', 'important');
+// property 방식
+target.className = 'important';
+</pre>
+<p id="target">
+    Hello world
+</p>
+<script>
+    var target = document.getElementById('target');
+    // attribute 방식
+    target.setAttribute('class', 'important');
+    // property 방식
+    target.className = 'important';
+</script>
+
+<a id="target5" href="./demo1.html">ot</a>
+<script>
+//현재 웹페이지가 http://localhost/webjs/Element/attribute_api/demo3.html 일 때
+var target = document.getElementById('target5');
+// http://localhost/webjs/Element/attribute_api/demo1.html
+console.log('target.href', target.href);
+// ./demo1.html
+console.log('target.getAttribute("href")', target.getAttribute("href"));
+</script>
+
+
+
+<h3>HTMLCollection은 리턴 결과가 복수인 경우에 사용하게 되는 객체 - 실시간으로 변경</h3>
+<ul class="uls">
+    <li>HTML</li>
+    <li>CSS</li>
+    <li id="active">JavaScript</li>
+</ul>
+
+<script>
+console.group('before');
+
+var lis = document.getElementsByTagName('li');
+console.log(lis.length);
+for(var i = 0; i < lis.length; i++){
+    console.log("lis.constructor.name : " + lis.constructor.name);
+    console.log(lis[i]);
+}
+console.groupEnd();
+console.group('after');
+lis[1].parentNode.removeChild(lis[1]);
+for(var i = 0; i < lis.length; i++){
+    console.log(lis[i]);
+}
+console.groupEnd();
+</script>
+
+<h3>jQuery 객체</h3>
+<pre>
+  var lis = document.getElementsByTagName('li');
+  li.css('color', 'green').css('text-decoration', 'underline')
+</pre>
+
+<h4>jQuery 조회</h4>
+<ul>
+    <li>html</li>
+    <li>css</li>
+    <li>JavaScript</li>
+</ul>
+
+<script>
+    console.log($('li').length);
+    console.log($('li')[0]);
+    console.log(" start : " + $('li')[0]);
+    var li = $('li');
+    for(var i=0; i<li.length; i++){
+        console.log(li[i]);
+    }
+</script>
+
+<h4>jQuery map 조회</h4><ul>
+    <li>html</li>
+    <li>css</li>
+    <li>JavaScript</li>
+</ul>
+
+<script>
+    var li = $('li');
+    li.map(function(index, elem){
+        console.log(index, elem);
+        $(elem).css('color', 'red');
+    })
+</script>
+
+<h4>jQuery 객체 API - https://api.jquery.com</h4>
+
+<h2>이벤트 객체</h2>
+<h4>이벤트란?</h4>
+<pre>
+  이벤트(event)는 어떤 사건을 의미한다. 브라우저에서의 사건이란 사용자가 클릭을 했을 '때', 스크롤을 했을 '때', 필드의 내용을 바꾸었을 '때'와 같은 것을 의미한다.
+</pre>
+<h4>이벤트 구성 - event target + event type + event handler</h4>
+<h4>이벤트 등록 방법</h4>
+<pre>
+  <b>인라인(inline) 방식</b>으로 이벤트를 등록하는 방법을 알아보자. 인라인 방식은 이벤트를 이벤트 대상의 태그 속성으로 지정하는 것이다. 다음은 버튼을 클릭했을 때 Hello world를 경고창으로 출력한다.
+  &lt input type="button" onclick="alert('Hello world');" value="button" /&gt
+
+  인라인 방식은 태그에 이벤트가 포함되기 때문에 이벤트의 소재를 파악하는 것이 편리하다. 하지만 정보인 HTML과 제어인 JavaScript가 혼재된 형태이기 때문에 바람직한 방법이라고 할수는 없다.
+</pre>
+
+<!--자기 자신을 참조하는 불편한 방법-->
+<input type="button" id="target55" onclick="alert('Hello world, '+document.getElementById('target55').value);" value="button" />
+<!--this를 통해서 간편하게 참조할 수 있다-->
+<input type="button" onclick="alert('Hello world, '+this.value);" value="button" />
+
+<pre>
+  <b>프로퍼티 리스너 방식</b>은 이벤트 대상에 해당하는 객체의 프로퍼티로 이벤트를 등록하는 방식이다. 인라인 방식에 비해서 HTML과 JavaScript를 분리할 수 있다는 점에서 선호되는 방식이지만 뒤에서 배울 addEventListener 방식을 추천한다.
+</pre>
+
+<input type="button" id="target56" value="button" />
+<input type="button" id="target57" value="button" />
+<input type="button" id="target58" value="button" />
+<script>
+    var t = document.getElementById('target56');
+    t.onclick = function(){
+        alert('Hello world');
+    }
+    var t = document.getElementById('target57');
+    t.onclick = function(event){
+      // alert('Hello world, '+event.target.value)
+      console.dir(event);
+    }
+    var t = document.getElementById('target58');
+    t.onclick = function(event){
+        var event = event || window.event;
+        var target = event.target || event.srcElement;
+        alert('Hello world, '+target.value)
+    }
+</script>
+<pre>
+  <b>addEventListener 방식</b>은 이벤트를 등록하는 가장 권장되는 방식이다. 이 방식을 이용하면 여러개의 이벤트 핸들러를 등록할 수 있다
+</pre>
+
+<input type="button" id="target59" value="button" />
+<input type="button" id="target60" value="button" />
+<input type="button" id="target61" value="target61" />
+<input type="button" id="target62" value="target62" />
+<script>
+    var t = document.getElementById('target59');
+    t.addEventListener('click', function(event){
+        alert('Hello world, '+event.target.value);
+    });
+    var t = document.getElementById('target60');
+    t.addEventListener('click', function(event){
+        alert(1);
+    });
+    t.addEventListener('click', function(event){
+        alert(2);
+    });
+
+    var t61 = document.getElementById('target61');
+    var t62 = document.getElementById('target62');
+
+    function btn_listener(event){
+      switch(event.target.id){
+        case 'target61':
+          alert(1);
+          break;
+        case 'target62':
+          alert(2);
+          break;
+      }
+    }
+   t61.addEventListener('click', btn_listener);
+   t62.addEventListener('click', btn_listener);
+
+</script>
+
+<h4>이벤트 전파(버블링과 캡처링)</h4>
+<pre>
+  HTML 태그는 중첩되어 있다. 따라서 특정한 태그에서 발생하는 이벤트는 중첩되어 있는 태그들 모두가 대상이 될 수 있다. 이런 경우 중첩된 태그들에 이벤트가 등록 되어 있다면 어떻게 처리 될까?
+  이벤트가 부모에서부터 발생해서 자식으로 전파되고 있다. 이러한 방식을 capturing이라고 한다. ie 낮은 버전에서는 작동하지 않기 때문에 많이 사용하지는 않는다.
+</pre>
+
+<style>
+     /*html{border:5px solid red;padding:30px;}
+     body{border:5px solid green;padding:30px;}
+     fieldset{border:5px solid blue;padding:30px;}
+     input{border:5px solid black;padding:30px;}*/
+ </style>
+
+ <fieldset>
+     <legend>event propagation</legend>
+     <input type="button" id="target63" value="target63">
+ </fieldset>
+ <script>
+ function handler(event){
+     var phases = ['capturing', 'target63', 'bubbling']
+     console.log(event.target.nodeName, this.nodeName, phases[event.eventPhase-1]);
+ }
+ function stopHandler(event){
+     var phases = ['capturing', 'target63', 'bubbling']
+     console.log(event.target.nodeName, this.nodeName, phases[event.eventPhase-1]);
+     event.stopPropagation();
+ }
+ // document.getElementById('target63').addEventListener('click', handler, true);
+ // document.querySelector('fieldset').addEventListener('click', handler, true);
+ // document.querySelector('body').addEventListener('click', handler, true);
+ // document.querySelector('html').addEventListener('click', handler, true);
+
+ document.getElementById('target63').addEventListener('click', handler, false);
+ document.querySelector('fieldset').addEventListener('click', handler, false);
+ document.querySelector('body').addEventListener('click', stopHandler, false);
+ document.querySelector('html').addEventListener('click', handler, false);
+ </script>
+
+ <h4>이벤트 기본동작의 취소</h4>
+ <pre>
+   <b>기본 이벤트</b>
+      텍스트 필드에 포커스를 준 상태에서 키보드를 입력하면 텍스트가 입력된다.
+      폼에서 submit 버튼을 누르면 데이터가 전송된다.
+      a 태그를 클릭하면 href 속성의 URL로 이동한다.
+ </pre>
+ <b>* inline 방식 - 이벤트의 리턴값이 false이면 기본 동작이 취소된다.</b>
+ <p>
+   <label>prevent event on</label><input id="prevent" type="checkbox" name="eventprevent" value="on" />
+ </p>
+ <p>
+   <a href="http://opentutorials.org" onclick="if(document.getElementById('prevent').checked) return false;">opentutorials</a>
+ </p>
+ <p>
+   <form action="http://opentutorials.org" onsubmit="if(document.getElementById('prevent').checked) return false;">
+     <input type="submit" />
+   </form>
+ </p>
+
+<b>* property 방식 - 이벤트의 리턴값이 false이면 기본 동작이 취소된다.</b>
+ <p>
+     <label>prevent event on</label><input id="prevent1" type="checkbox" name="eventprevent" value="on" />
+ </p>
+ <p>
+     <a id="open" href="http://opentutorials.org">opentutorials</a>
+ </p>
+ <p>
+     <form id="form" action="http://opentutorials.org">
+             <input type="submit" />
+     </form>
+ </p>
+
+ <script>
+    //  document.querySelector('a').onclick = function(event){
+     document.getElementById('open').onclick = function(event){
+         if(document.getElementById('prevent1').checked)
+             return false;
+     };
+    //  document.querySelector('form').onclick = function(event){
+     document.getElementById('form').onclick = function(event){
+         if(document.getElementById('prevent1').checked)
+             return false;
+     };
+ </script>
+
+<b>* addEventListener 방식 - 이 방식에서는 이벤트 객체의 preventDefault 메소드를 실행하면 기본 동작이 취소된다.</b>
+
+  <p>
+    <label>prevent event on</label><input id="prevent2" type="checkbox" name="eventprevent" value="on" />
+  </p>
+  <p>
+    <a id="open1" href="http://opentutorials.org">opentutorials</a>
+  </p>
+  <p>
+    <form id="form1" action="http://opentutorials.org">
+      <input type="submit" />
+    </form>
+  </p>
+
+  <script>
+  document.getElementById('open1').addEventListener('click', function(event){
+  // document.querySelector('a').addEventListener('click', function(event){
+    if(document.getElementById('prevent2').checked)
+    event.preventDefault();
+  });
+
+  document.getElementById('form1').addEventListener('submit', function(event){
+  // document.querySelector('form').addEventListener('submit', function(event){
+    if(document.getElementById('prevent2').checked)
+    event.preventDefault();
+  });
+
+  </script>
+
+<h4>이벤트 Types</h4>
+
+<b>* submit - 폼의 정보를 서버로 전송하는 명령.</b>
+
+<form id="target71" action="result.html">
+    <label for="name">name</label> <input id="name71" type="name" />
+    <input type="submit" />
+</form>
+
+<script>
+var t = document.getElementById('target71');
+t.addEventListener('submit', function(event){
+    if(document.getElementById('name71').value.length === 0){
+        alert('Name 필드의 값이 누락 되었습니다');
+        event.preventDefault();
+    }
+});
+</script>
+
+<b>* change - 폼 컨트롤의 값이 변경 되었을 때 발생하는 이벤트.</b>
+
+<p id="result"></p>
+<input id="target72" type="name" />
+
+<script>
+var t = document.getElementById('target72');
+t.addEventListener('change', function(event){
+    document.getElementById('result').innerHTML=event.target.value;
+});
+</script>
+<br><br>
+
+<b>* blur, focus - focus는 엘리먼트에 포커스가 생겼을 때, blur은 포커스가 사라졌을 때 발생하는 이벤트다.</b>
+<br>
+<input id="target73" type="name" />
+
+<script>
+var t73 = document.getElementById('target73');
+t73.addEventListener('blur', function(event){
+    alert('blur');
+});
+t73.addEventListener('focus', function(event){
+    alert('focus');
+});
+</script>
+
+
+
+
+
+
+<br><br><br><br><br><br>
+
+</body>
+</html>
