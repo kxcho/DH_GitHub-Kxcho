@@ -23,8 +23,6 @@ public class MenuUi extends AbstractUiTemplate {
         System.out.println("번호를 입력한 후 Enter 키를 눌러 주세요.");
     }
 
-// comment insert
-
     protected int getMaxMenuNumber() {
         return 2;
     }
