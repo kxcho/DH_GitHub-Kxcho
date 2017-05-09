@@ -13,6 +13,7 @@
 		<th align="center" width="320">상품명</th>
 		<th align="center" width="100">가격</th>
 		<th align="center" width="100">가격2</th>
+		<th align="center" width="100">GitHub1</th>
 	</tr>
 	<c:forEach items="${itemList}" var="item">
 		<tr class="record">
