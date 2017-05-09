@@ -14,6 +14,7 @@
 		<th align="center" width="100">가격</th>
 		<th align="center" width="100">가격2</th>
 		<th align="center" width="100">GitHub1</th>
+		<th align="center" width="100">GitHub2</th>
 	</tr>
 	<c:forEach items="${itemList}" var="item">
 		<tr class="record">
